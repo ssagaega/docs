@@ -1,12 +1,179 @@
-<!DOCTYPE HTML>  
-<html>  
-<meta charset="utf-8">  
-<link href="style.css" rel="stylesheet"/>  
-<script src="app.js"></script>  
-<head>  
-    <title>SSaGaeSSaGae's page</title>
-</head>  
-<body>  
-<h1>SSaGae SSaGae!!!!!!!!!!</h1>  
-</body>  
-</html>  
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <title>싸게싸게</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+  <!-- feathericons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <!-- vue.js -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- csv -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
+  
+  <link rel="css/index.js"></link>
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/index.js"></script>
+</head>
+
+<body>
+  
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://ssagaessagae.ga">
+      <img src="https://lh3.googleusercontent.com/aQhR9dEzHJ7ETPe-obFNV-bkg6WvY__VuOY6AbgW9VTeZpHuWuuKO-dfCIJuJgYUQw=s128" width="30" height="30" class="d-inline-block align-top" alt="">
+      싸게싸게
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="http://ssagaessagae.ga/cart" target="_blank"><strong><i class="fa fa-shopping-bag pr-1"></i>장바구니</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://goo.gl/forms/5tuB1phddJ2kCeVt2" target="_blank"><strong><i class="fa fa-question-circle pr-1"></i></i>문의사항</a></strong>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  
+  <div class="container">
+    <div class="row justify-content-md-center mb-5 mt-5">
+      <div class='col-12 col-md-6'>
+        
+        <div class="container" id="searchApp">
+          <div class="row justify-content-md-center mb-5 mt-5">
+            <div class='col-12'>
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">어떤 스타일의 요금제를 찾으세요?</h4>
+                    <div class="d-inline-block" v-for="(item, index) in search.simple">
+                      <button type="button" :class="item.checked?sc:df" @click="item.checked=!item.checked">{{item.label}}</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class='col-12'>
+              <div class="card">
+              <button type="button" @click="searchSimple" class="btn btn-outline-primary">요금제 찾기</button>        
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-md-center">
+            <div class='col-12'>
+              <a data-toggle="collapse" href="#advancedSearch" aria-expanded="false" aria-controls="collapseExample">상세 검색</a>
+            </div>
+          </div>
+
+          <div class="collapse" id="advancedSearch">
+
+            <div class="row justify-content-md-center mb-3 mt-5">
+              <div class='col-12'>
+                <div class="card">
+                  <div class="card-body">
+                      <h4 class="card-title">통신사 선택</h4>                    
+                      <div class="d-inline-block" v-for="(item, index) in search.agency">
+                        <button type="button" :id="'search_agency_'+index" :class="item.checked?sc:df" @click="item.checked=!item.checked">{{item.label}}</button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+
+            <div class="row justify-content-md-center mb-3">
+              <div class='col-12'>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">망선택</h4>
+                    <div class="d-inline-block" v-for="(item, index) in search.network">
+                      <button type="button" :id="'search_network_'+index" :class="item.checked?sc:df" @click="item.checked=!item.checked">{{item.label}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row justify-content-md-center mb-3">
+              <div class='col-12'>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">데이터 선택</h4>
+                    <div class="d-inline-block" v-for="(item, index) in search.data">
+                      <button type="button" :id="'search_data_'+index" :class="item.checked?sc:df" @click="item.checked=!item.checked">{{item.label}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row justify-content-md-center mb-3">
+              <div class='col-12'>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">데이터 옵션 선택</h4>
+                    <div class="d-inline-block" v-for="(item, index) in search.datainfinity">
+                      <button type="button" :id="'search_datainfinity_'+index" :class="item.checked?sc:df" @click="item.checked=!item.checked">{{item.label}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row justify-content-md-center mb-3">
+              <div class='col-12'>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">통화 선택</h4>
+                    <div class="d-inline-block" v-for="(item, index) in search.call">
+                      <button type="button" :id="'search_call_'+index" :class="item.checked?sc:df" @click="item.checked=!item.checked">{{item.label}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row justify-content-md-center mb-5">
+              <div class='col-12'>
+                <div class="card">
+                <button type="button" class="btn btn-outline-primary" @click="searchDetail">요금제 찾기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    feather.replace()
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+</body>
+
+</html>
