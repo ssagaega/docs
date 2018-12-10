@@ -129,3 +129,32 @@ function telegram() {
     createAlert( '정보 개선에 참여해 주셔서 감사합니다.', 'alert-success')
   });
 }
+
+
+
+
+function loadMore( app ) {
+  var current = app.scrollsCurrent;
+  for ( var i=current; i < current + app.scrollsSize; i++ ) {
+    var item = app.items[i];
+    if ( item != null ) {
+      app.scrolls.push( item );
+      app.scrollsCurrent++;
+    }
+  }
+}
+
+
+
+function infinityScroll( app ) {
+  $(window).scroll(function() {
+    var docHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+    )
+    if( $(window).scrollTop() + $(window).height() > docHeight - app.scrollsBefore ) {
+      loadMore( app );
+    }
+  });
+}
