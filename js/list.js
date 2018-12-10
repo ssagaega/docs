@@ -7,7 +7,7 @@ $(document).ready(function () {
   
   if ( parsed.listed ) {
     var listed = parsed.listed.split(',');
-    var filted = this.items.filter( function( item ) {
+    var filted = items.filter( function( item ) {
       if ( listed.includes( item.id ) )
         return true;        
     });
