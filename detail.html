@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>Low Cost</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  
+  <!-- feathericons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <!-- vue.js -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- csv -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
+  <!-- cookie -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://ssagaessagae.ga">
+      <img src="https://lh3.googleusercontent.com/aQhR9dEzHJ7ETPe-obFNV-bkg6WvY__VuOY6AbgW9VTeZpHuWuuKO-dfCIJuJgYUQw=s128" width="30" height="30" class="d-inline-block align-top" alt="">
+      싸게싸게
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="http://ssagaessagae.ga/cart" target="_blank"><strong><i class="fa fa-shopping-bag pr-1"></i>장바구니</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://goo.gl/forms/5tuB1phddJ2kCeVt2" target="_blank"><strong><i class="fa fa-question-circle pr-1"></i></i>문의사항</a></strong>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container pt-5" id="detailApp">
+    <div id="pageMessages"></div>
+    <div v-if="item != null && item.id > 0">
+      <div class="row justify-content-md-center" style='padding-top:30px'>
+        <div class='col-12 col-md-6'>
+          <div class="card text-center shadow">
+            <div class="card-header">{{item.vendor}} ( {{item.agency}} | {{item.network}} ) <span v-if="item.promotion" class="badge badge-pill badge-danger">프로모션</span></div>
+            <div class="card-body">
+              <h4 class="card-title text-info">{{ item.title }}</h4>
+              <div v-if="item.promotion">
+                <h5 class='d-inline-block'>월</h5><h5 class='d-inline-block pt-4' style='text-decoration:line-through'>{{(item.origin_price*1).toLocaleString()}}</h5><h5 class='d-inline-block'>원</션h3><h3></h3>
+              </div>
+              <h3 class='d-inline-block pb-4'>월</h3><h1 :class='item.promotion?"d-inline-block text-danger":"d-inline-block"' style='text-decoration:none'>{{(item.price*1).toLocaleString()}}</h1><h3 class='d-inline-block'>원</션h3><h3></h3>
+
+              <!-- 패키지 상품 -->
+              <div v-if="item.package_offer">
+                <i data-feather="package" style='height: 1em;'></i><h5 class='d-inline-block'>{{item.package_offer}}{{item.package_unit}}</h5><br>
+                <h5 class='d-inline-block'>{{item.package_detail}}</h5><br>
+              </div>
+              
+              <!-- 기본 -->
+              <div class="row justify-content-md-center pt-3 pb-3">
+                <div class="col-4" v-if="item.call" class='d-inline-block'>
+                  <h3><i class="fa fa-phone"></i></h3>
+                  <h3>{{item.call}}분</h5>
+                </div>
+                <div class="col-4 border border-dark border-top-0 border-bottom-0" v-if="item.sms" class='d-inline-block'>
+                  <h3><i class="fa fa-comment"></i></h3>
+                  <h3>{{item.sms}}건</h3>
+                </div>
+                <div class="col-4" v-if="item.data" class='d-inline-block'>
+                  <h3><i class="fa fa-wifi"></i></h3>
+                  <h3>{{ item.data }}{{ item.data_unit }}</h3>
+                  <span v-if="item.data_daily_offer" class="badge badge-secondary ml-1">{{item.data_daily_offer}}/일</span>
+                  <span v-if="item.data_infinity" class="badge badge-secondary ml-1">{{ item.data_infinity }}</span><h5></h5>
+                </div>
+              </div>
+                
+              <div v-if="item.data_auto_shutdown">
+                <i data-feather="wifi-off" style='height: 1em;'></i><h5 class='d-inline-block'>데이터 소진시 자동차단</h5><br>
+              </div>
+              <div v-if="item.data_free_wifi">
+                <i data-feather="wifi" style='height: 1em;'></i><h5 class='d-inline-block'>와이파이 무료</h5>
+              </div>
+              
+              <div v-if="item.card1" class="row justify-content-md-center">
+                <div class="col-6 pt-3" v-for="n in 5">
+                  <div class="bg-light pt-3 pb-3"  v-if="item['card'+n]">
+                    <i data-feather="credit-card" style='height: 1em;'></i><h5 class='d-inline-block'>{{item['card'+n].split('_')[0]}}카드<i data-toggle="tooltip" data-placement="top" title="통신비 자동이체 신청하면, 
+카드이용 실적에 따라 캐시백적용" class="fa fa-question-circle"/></i></h5>
+                    <h5>{{item['card'+n].split('_')[1]}}</h5>
+                    <h5>할인 : {{item['card'+n].split('_')[3]}}만</h5>
+                    <h5>전월실적 : {{item['card'+n].split('_')[2]}}만</h5>
+                    <h5 class="text-danger">월 {{item.price*1 < (item['card'+n].split('_')[3]*1000) ? 0 : (item.price*1 - (item['card'+n].split('_')[3]*10000)).toLocaleString() }} 원</h5>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row justify-content-md-center ">
+                <div class='col-6 pt-2'>
+                  <a class="btn btn-outline-primary btn-block" role="button" :href="'tel:' + item.callcenter"><strong>전화:{{item.callcenter}}</strong></a>
+                </div>
+                <div class='col-6 pt-2'>
+                  <a class="btn btn-outline-primary btn-block" role="button" :href="item.homepage" target="_blank">홈페이지</a>
+                </div>
+              </div>
+              <div class="row justify-content-md-center ">
+                  <div class='col-6 pt-2'>
+                    <button :class="'btn btn-block btn-outline-' + ( carts.includes( item.id * 1 ) ? 'success' : 'primary' )" @click="carting( item.id )"><i class="fa fa-shopping-cart"></i> {{ carts.includes( item.id * 1 ) ? '빼기' : '담기' }}</button>
+                  </div>
+                  <div class='col-6 pt-2'>
+                    <a role="button" class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#reportModal" data-whatever="@mdo"><strong class="text-warning"><i class="fa fa-exclamation-triangle"></i>신고</strong></a>
+                  </div>
+                </div>
+           </div>
+
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="row justify-content-md-center pb-5">
+      </div>
+    </div>
+    
+    <div v-if="item == null || item.id == null" class="row justify-content-md-center pt-4">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center">
+          <h4 class="display-3">없는 상품 입니다</h4>
+          <p class="lead">장바구니에 담은 상품을 비교 할 수 있는 서비스를 준비중입니다.</p>
+          <a role="button" href="http://ssagaessagae.ga" target="_blank" class="btn btn-outline-primary">검색 페이지로 돌아가기</a>
+        </div>
+      </div>
+    </div>
+</div>
+  
+    
+    <!-- 신고 모달 -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">상품 정보 에러 신고</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="form-control-label">상품명:</label>
+                <input type="text" disabled class="form-control" id="recipient-name" :value="item.title">
+              </div>
+              
+              <div class="form-group">
+                <label for="recipient-name" class="form-control-label">이메일 :</label>
+                <input type="text" class="form-control" id="recipient-name" v-model="errorReporter" placeholder="(선택 사항)결과를 이메일로 알려드립니다">
+              </div>
+              
+              <div class="form-group">
+                <label for="message-text" class="form-control-label">내용 :</label>
+                <textarea class="form-control" id="message-text" v-model="errorReportMessage"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="telegram()">감사한 오류 신고</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/common.js"></script>
+  <script src="js/detail.js"></script>
+  <link src="css/index.css"></link>
+  
+  <script>
+      feather.replace()
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+  </script>
+</body>
+</html>
