@@ -112,7 +112,7 @@ var detailApp = new Vue({
       Cookies.set( 'cart', cart, { expires: 7 } );
       
       if ( this.cartmode ) {
-        var filted = this.items.filter( function( item ) {
+        var filted = items.filter( function( item ) {
           if ( cart.includes( item.id*1 ) ) {
             return true;
           }
