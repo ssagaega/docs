@@ -8,7 +8,7 @@ $(document).ready(function () {
   if ( parsed.listed ) {
     var listed = parsed.listed.split(',');
     var filted = items.filter( function( item ) {
-      if ( listed.includes( item.id ) )
+      if ( listed.includes( ''+item.id ) )
         return true;        
     });
     setItems( filted );
