@@ -225,7 +225,7 @@ var listApp = new Vue({
       Cookies.set( 'cart', cart, { expires: 7 } );
       
       if ( this.cartmode ) {
-        var filted = this.items.filter( function( item ) {
+        var filted = items.filter( function( item ) {
           if ( cart.includes( item.id*1 ) ) {
             return true;
           }
@@ -236,7 +236,7 @@ var listApp = new Vue({
       createAlert('장바구니','','장바구니는 7일간 유효합니다','info',false,true,'pageMessages');
     }
     ,sortOption : function( sorttype ) {
-      var sorted = this.items;
+      var sorted = items;
       if ( sorttype == null ) {
         sorttype = getRadio( this['sorttype'] );
       }
