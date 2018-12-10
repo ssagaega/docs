@@ -69,9 +69,8 @@
             </div>
           </div>
 
-          <div v-for="(item, i) in scrolls">
-            <div class="row justify-content-md-center pt-4">
-              <div class='col-12'>
+          <div>
+            <div v-for="(item, i) in scrolls" class='col-12 col-md-4 d-inline-block pt-5'>
                 <div class="card text-center">
                   <div class="card-header">[ {{ item.id}} ] {{ item.vendor }} ( {{ item.agency }} | {{ item.network }} ) <span v-if="item.promotion" class="badge badge-pill badge-danger">프로모션</span></div>
                   <div class="card-body">
@@ -114,7 +113,6 @@
                   </div>
                   
                 </div>
-              </div>
             </div>
           </div>
           
