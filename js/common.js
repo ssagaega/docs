@@ -120,3 +120,12 @@ function createAlert(title, summary, details, severity, dismissible, autoDismiss
     }, 500);
   }
 }
+
+ 
+
+function telegram() {
+  var url = "https://api.telegram.org/bot572309405:AAFIvvAIGOciZcnkzQHPqUaRoWPNebvULmg/sendMessage?chat_id=59644837&text=" + encodeURI( "[" + detailApp.item.id + "] [" + detailApp.item.title + "] \n" + detailApp.errorReportMessage );
+  $.get( url, function( data, status ) {
+    createAlert( '정보 개선에 참여해 주셔서 감사합니다.', 'alert-success')
+  });
+}
