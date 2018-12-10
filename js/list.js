@@ -1,6 +1,3 @@
-var domain = 'http://ssagae.ga'
-var items;
-
 $(document).ready(function () {
   var parsed = getAllUrlParams( window.location.href );  
   
@@ -8,16 +5,14 @@ $(document).ready(function () {
     listApp.carts = cart;
   });
   
-  getCSV( function() {
-    if ( parsed.listed ) {
-      var listed = parsed.listed.split(',');
-      var filted = this.items.filter( function( item ) {
-        if ( listed.includes( item.id ) )
-          return true;        
-      });
-      setItems( filted );
-    }
-  });
+  if ( parsed.listed ) {
+    var listed = parsed.listed.split(',');
+    var filted = this.items.filter( function( item ) {
+      if ( listed.includes( item.id ) )
+        return true;        
+    });
+    setItems( filted );
+  }
   
   scrollCheck( loadMore );
 });
@@ -82,15 +77,6 @@ function getAllUrlParams( url ) {
   }
 
   return obj;
-}
-
-function getCSV( callback ) {
-  var url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTWze7qOfMnYJC-KZBlSmLpmut8hARDX4zS_rAbRraECdgQ7GDVu5wOvqIu7uUrksyZoEzwH3Lt5K2K/pub?gid=562347642&single=true&output=csv"
-  $.get( url, function( data, status ) {
-    var json = $.csv.toObjects( data );    
-    items = json;
-    callback();
-  });
 }
 
 
