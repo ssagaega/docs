@@ -9,7 +9,7 @@ $(document).ready(function () {
   
   if ( cart != null ) {
     listApp.carts = cart;
-    var filted = this.items.filter( function( item ) {
+    var filted = items.filter( function( item ) {
       if ( cart.includes( item.id*1 ) ) {
         return true;
       }
