@@ -43,7 +43,7 @@ function setItems( filtered ) {
   }
   
   history.pushState(null, null, url);
-  loadMore();
+  loadMore( listApp );
 }
 
 
