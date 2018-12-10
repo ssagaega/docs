@@ -108,7 +108,7 @@
                     <h5>{{item['card'+n].split('_')[1]}}</h5>
                     <h5>할인 : {{item['card'+n].split('_')[3]}}만</h5>
                     <h5>전월실적 : {{item['card'+n].split('_')[2]}}만</h5>
-                    <h5 class="text-danger">월 {{item.price*1 < (item['card'+n].split('_')[3]*1000) ? 0 : (item.price*1 - (item['card'+n].split('_')[3]*10000)).toLocaleString() }} 원</h5>
+                    <h5 class="text-danger">월 {{item.price*1 < (item['card'+n].split('_')[3]*10000) ? 0 : (item.price*1 - (item['card'+n].split('_')[3]*10000)).toLocaleString() }} 원</h5>
                   </div>
                 </div>
               </div>
