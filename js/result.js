@@ -1,5 +1,3 @@
-var items;
-
 $(document).ready(function () {  
   var parsed = getAllUrlParams( window.location.href );
   
@@ -25,23 +23,20 @@ $(document).ready(function () {
     listApp.carts = JSON.parse( cart );
   }
     
-  
-  getCSV( function() {
-    if ( listed && listed.length > 0 ) {
-      searchApp.listed = listed;
-      searchApp.hide = true;
-      searchApp.searchDetail();
-      
-    } else if ( search ) {
-      searchApp.searchDetail();
-      
-    } else if ( parsed.cart ) {
-      searchApp.listed = listApp.carts;
-      listApp.cartmode = true;
-      searchApp.hide = true;
-      searchApp.searchDetail();
-    }
-  });
+  if ( listed && listed.length > 0 ) {
+    searchApp.listed = listed;
+    searchApp.hide = true;
+    searchApp.searchDetail();
+
+  } else if ( search ) {
+    searchApp.searchDetail();
+
+  } else if ( parsed.cart ) {
+    searchApp.listed = listApp.carts;
+    listApp.cartmode = true;
+    searchApp.hide = true;
+    searchApp.searchDetail();
+  }
   
   $(window).scroll(function() {
     var docHeight = Math.max(
@@ -93,33 +88,12 @@ function getAllUrlParams( url ) {
   return obj;
 }
 
-function getCSV( callback ) {
-  var url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTWze7qOfMnYJC-KZBlSmLpmut8hARDX4zS_rAbRraECdgQ7GDVu5wOvqIu7uUrksyZoEzwH3Lt5K2K/pub?gid=562347642&single=true&output=csv"
-  $.get( url, function( data, status ) {
-    var json = $.csv.toObjects( data );    
-    items = json;
-    callback();
-  });
-}
-
 
 function setItems( filtered ) {
   listApp.scrolls = [];
   listApp.scrollsCurrent = 0;
   listApp.items = filtered;
   
-  /*
-  var url = "";
-  if ( filtered.length > 0 ) {
-    url += "?listed=";
-    for ( i in filtered ) {
-      url += filtered[i].id + ',';
-    }
-    url = url.substring(0, url.length - 1);
-  }
-  
-  history.pushState(null, null, url);
-  */
   loadMore();
 }
 
