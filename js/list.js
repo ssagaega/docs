@@ -14,7 +14,7 @@ $(document).ready(function () {
     setItems( filted );
   }
   
-  scrollCheck( loadMore );
+  infinityScroll( listApp );
 });
 
 
@@ -27,50 +27,14 @@ function getCookie( callback ) {
 }
 
 
-function scrollCheck( callback ) {
-  $(window).scroll(function() {
-    var docHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-    )
-    if( $(window).scrollTop() + $(window).height() > docHeight - listApp.scrollsBefore ) {
-      callback();
-    }
-  });
-}
-
 
 function setItems( filtered ) {
   listApp.scrolls = [];
   listApp.scrollsCurrent = 0;
   listApp.items = filtered;
-  
-  /*
-  // url 변경
-  var url = "";
-  if ( filtered.length > 0 ) {
-    url += "?listed=";
-    for ( i in filtered ) {
-      url += filtered[i].id + ',';
-    }
-    url = url.substring(0, url.length - 1);
-  }  
-  history.pushState(null, null, url);
-  */
-  loadMore();
+  loadMore( listApp );
 }
 
-function loadMore() {
-  var current = listApp.scrollsCurrent;
-  for ( var i=current; i < current + listApp.scrollsSize; i++ ) {
-    var item = listApp.items[i];
-    if ( item != null ) {
-      listApp.scrolls.push( item );
-      listApp.scrollsCurrent++;
-    }
-  }
-}
 
 
 var listApp = new Vue({
