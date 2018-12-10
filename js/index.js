@@ -221,11 +221,11 @@ var searchApp = new Vue({
       this.clearAll( 'data' );
       this.clearAll( 'datainfinity' );
       this.clearAll( 'call' );
-      window.location.href = 'https://ssagaessagae.ga/result?' + this.makeParams();
+      window.location.href = 'https://ssagae.ga/result?' + this.makeParams();
     }
     ,searchDetail() {
       this.clearAll( 'simple' );
-      window.location.href = 'https://ssagaessagae.ga/result?' + this.makeParams();
+      window.location.href = 'https://ssagae.ga/result?' + this.makeParams();
     }
     ,clearAll( key ) {
       var list = this.search[key];
