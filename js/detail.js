@@ -3,7 +3,6 @@ var items;
 $(document).ready(function () {
   var parsed = getAllUrlParams( window.location.href );
   
-  parsed.item = 1;
   var cart = Cookies.get('cart');
   if ( cart ) {
     detailApp.carts = JSON.parse( cart );
