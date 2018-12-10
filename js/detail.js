@@ -81,9 +81,9 @@ function filterById( selected ) {
 }; 
 
 function telegram() {
-  var url = "https://api.telegram.org/bot572309405:AAFIvvAIGOciZcnkzQHPqUaRoWPNebvULmg/sendMessage?chat_id=59644837&text=" + encodeURI( "[" + detailApp.id + "] [" + detailApp.title + "] \n" + detailApp.errorReportMessage );
+  var url = "https://api.telegram.org/bot572309405:AAFIvvAIGOciZcnkzQHPqUaRoWPNebvULmg/sendMessage?chat_id=59644837&text=" + encodeURI( "[" + detailApp.item.id + "] [" + detailApp.item.title + "] \n" + detailApp.errorReportMessage );
   $.get( url, function( data, status ) {
-    showalert( '정보 개선에 참여해 주셔서 감사합니다.', 'alert-success')
+    createAlert( '정보 개선에 참여해 주셔서 감사합니다.', 'alert-success')
   });
 }
 
