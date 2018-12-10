@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <title>싸게싸게 ( ssa gae . ga )</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">  
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+  <!-- feathericons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <!-- vue.js -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- csv -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
+  <!-- cookie -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://ssagaessagae.ga">
+      <img src="https://lh3.googleusercontent.com/aQhR9dEzHJ7ETPe-obFNV-bkg6WvY__VuOY6AbgW9VTeZpHuWuuKO-dfCIJuJgYUQw=s128" width="30" height="30" class="d-inline-block align-top" alt="">
+      싸게싸게
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="http://ssagaessagae.ga/cart" target="_blank"><strong><i class="fa fa-shopping-bag pr-1"></i>장바구니</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://goo.gl/forms/5tuB1phddJ2kCeVt2" target="_blank"><strong><i class="fa fa-question-circle pr-1"></i></i>문의사항</a></strong>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  
+  <div class="container pt-5" >
+    <div class="row justify-content-md-center mb-5 mt-5">
+      <div class='col-12 col-md-6 align-self-top'>
+        <div class="container" id="listApp">
+          
+          <div v-if="items.length != 0" class="row justify-content-md-center pt-4">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-light" type="button">내 장바구니 공유</button>
+              </span>
+              <input id="linkinput" type="text" class="form-control" :value="'https://ssagaessagae.ga/list?listed=' + this.carts">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" onClick="copyLink()">링크복사</button>
+              </span>
+            </div>
+          </div>
+          
+          <div v-if="items.length != 0" class="row justify-content-md-center pt-4">
+            <div class='col-12'>
+              {{ items.length }} 건
+              <button type="button" class="btn btn-link" @click="sortOption('price')">가격</button>
+              <button type="button" class="btn btn-link"  @click="sortOption('data')">데이터</button>
+              <button type="button" class="btn btn-link"  @click="sortOption('promotion')">프로모션</button>
+            </div>
+          </div>
+
+          <div v-for="(item, i) in scrolls">
+            <div class="row justify-content-md-center pt-4">
+              <div class='col-12'>
+                <div class="card text-center">
+                  <div class="card-header">[ {{ item.id}} ] {{ item.vendor }} ( {{ item.agency }} | {{ item.network }} ) <span v-if="item.promotion" class="badge badge-pill badge-danger">프로모션</span></div>
+                  <div class="card-body">
+                    <h4 class="card-title text-info">{{ item.title }}</h4>
+
+                    <h3 style='display:inline-block'>월</h3>
+                    <h1 style='display:inline-block'>{{ item.price == null ? '' : (item.price * 1).toLocaleString() }}</h1>
+                    <h3 style='display:inline-block'>원</h3>
+                    <h3></h3>
+
+                    <div v-if="item.package_offer">
+                      <i data-feather="package" style='height: 1em;'></i>
+                      <h5 style='display:inline-block'>{{ item.package_offer == -1 ? '기본' : (item.package_offer*1).toLocaleString() + ' ' + item.package_unit }} <span class="badge badge-secondary">조절형</span></h5>
+                    </div>
+
+                    <div class="d-inline-block" v-if="item.call">
+                      <i data-feather="phone-call" style='height: 1em;'></i>
+                      <h5 style='display:inline-block'>{{ item.call == -1 ? '기본' : (item.call*1).toLocaleString() + '분' }}</h5>
+                    </div>
+
+                    <div class="d-inline-block" v-if="item.sms">
+                      <i data-feather="message-circle" style='height: 1em;'></i>
+                      <h5 style='display:inline-block'>{{ item.sms == -1 ? "기본" : (item.sms*1).toLocaleString() + '건' }}</h5>
+                    </div>
+
+                    <div class="d-inline-block" v-if="item.data">
+                      <i data-feather="wifi" style='height: 1em;'></i>
+                      <h5 style='display:inline-block'>{{ item.data == -1 ? "기본" : (item.data*1).toLocaleString() + item.data_unit }}</h5>
+                    </div>
+
+                    <span v-if="item.data_daily_offer" class="badge badge-secondary ml-1">{{ item.data_daily_offer }}/일</span>
+                    <span v-if="item.data_infinity" class="badge badge-secondary ml-1">{{ item.data_infinity }}</span>
+                    <h5></h5>
+
+                  </div>
+                  
+                  <div class="card-footer text-center">
+                    <a class="btn btn-outline-primary" role="button" :href="'http://ssagaessagae.ga/detail?item='+item.id" target="_blank">자세히 보기</a>
+                    <button :class="'btn btn-outline-' + ( carts.includes( item.id * 1 ) ? 'success' : 'primary' )" @click="carting( item.id )"><i class="fa fa-shopping-cart"></i> {{ carts.includes( item.id * 1 ) ? '빼기' : '담기' }}</button>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div v-if="items.length == 0" class="row justify-content-md-center pt-4">
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container text-center">
+                <h4 class="display-3">장바구니가</h4>
+                <h4 class="display-3">비었군요</h4>
+                <p class="lead">장바구니에 담은 상품을 비교 할 수 있는 서비스를 준비중입니다.</p>
+                <a role="button" href="http://ssagaessagae.ga" target="_blank" class="btn btn-outline-primary">검색 페이지로 돌아가기</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/common.js"></script>
+  <script src="js/cart.js"></script>
+  <link src="css/index.css"></link>
+  
+  <script>
+    feather.replace()
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+</body>
+
+</html>
