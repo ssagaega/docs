@@ -38,16 +38,7 @@ $(document).ready(function () {
     searchApp.searchDetail();
   }
   
-  $(window).scroll(function() {
-    var docHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-    )
-    if( $(window).scrollTop() + $(window).height() > docHeight - listApp.scrollsBefore ) {
-      loadMore();
-    }
-  });
+  infinityScroll( listApp );
 });
 
 
@@ -56,18 +47,7 @@ function setItems( filtered ) {
   listApp.scrollsCurrent = 0;
   listApp.items = filtered;
   
-  loadMore();
-}
-
-function loadMore() {
-  var current = listApp.scrollsCurrent;
-  for ( var i=current; i < current + listApp.scrollsSize; i++ ) {
-    var item = listApp.items[i];
-    if ( item != null ) {
-      listApp.scrolls.push( item );
-      listApp.scrollsCurrent++;
-    }
-  }
+  loadMore( listApp );
 }
 
 
