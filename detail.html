@@ -70,7 +70,7 @@
 
               <!-- 패키지 상품 -->
               <div v-if="item.package_offer">
-                <i data-feather="package" style='height: 1em;'></i><h5 class='d-inline-block'>{{item.package_offer}}{{item.package_unit}}</h5><br>
+                <i class="fa fa-cube"></i><h5 class='d-inline-block'>{{item.package_offer}}{{item.package_unit}}</h5><br>
                 <h5 class='d-inline-block'>{{item.package_detail}}</h5><br>
               </div>
               
@@ -93,16 +93,20 @@
               </div>
                 
               <div v-if="item.data_auto_shutdown">
-                <i data-feather="wifi-off" style='height: 1em;'></i><h5 class='d-inline-block'>데이터 소진시 자동차단</h5><br>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-wifi fa-stack-1x"></i>
+                  <i class="fa fa-ban fa-stack-2x"></i>
+                </span>
+                <h5 class='d-inline-block'>데이터 소진시 자동차단</h5><br>
               </div>
               <div v-if="item.data_free_wifi">
-                <i data-feather="wifi" style='height: 1em;'></i><h5 class='d-inline-block'>와이파이 무료</h5>
+                <i class="fa fa-wifi"></i><h5 class='d-inline-block'>와이파이 무료</h5>
               </div>
               
               <div v-if="item.card1" class="row justify-content-md-center">
                 <div class="col-6 pt-3" v-for="n in 5">
                   <div class="bg-light pt-3 pb-3"  v-if="item['card'+n]">
-                    <i data-feather="credit-card" style='height: 1em;'></i><h5 class='d-inline-block'>{{item['card'+n].split('_')[0]}}카드<i data-toggle="tooltip" data-placement="top" title="통신비 자동이체 신청하면, 
+                    <i class="fa fa-credit-card"></i><h5 class='d-inline-block'>{{item['card'+n].split('_')[0]}}카드<i data-toggle="tooltip" data-placement="top" title="통신비 자동이체 신청하면, 
 카드이용 실적에 따라 캐시백적용" class="fa fa-question-circle"/></i></h5>
                     <h5>{{item['card'+n].split('_')[1]}}</h5>
                     <h5>할인 : {{item['card'+n].split('_')[3]}}만</h5>
