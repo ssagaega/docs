@@ -116,8 +116,8 @@ function createAlert(title, summary, details, severity, dismissible, autoDismiss
       msg.addClass("flipOutX");
       setTimeout(function(){
         msg.remove();
-      },500);
-    }, 500);
+      },1000);
+    }, 1000);
   }
 }
 
