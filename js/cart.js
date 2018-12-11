@@ -24,7 +24,8 @@ function copyLink() {
   var copyText = document.getElementById("linkinput");
   copyText.select();
   document.execCommand("copy");  
-  alert('링크가 복사되었습니다. 공유해보세요!');
+  //alert('링크가 복사되었습니다. 공유해보세요!');
+  createAlert('링크복사','','링크가 복사되었습니다. 공유해보세요!','info',false,true,'pageMessages');
 }
 
 
