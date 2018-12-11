@@ -19,10 +19,14 @@ $(document).ready(function () {
   
   infinityScroll( listApp );
   
-  $(document).on("mouseleave", ".copy", function(e) {
-      $(this).removeClass("tooltipped tooltipped-s")
-             .removeAttr("aria-label");
-  });  
+  var clipboardDemos = new Clipboard('[data-clipboard-demo]');
+
+  clipboardDemos.on('success', function(e) {
+      e.clearSelection();
+  });
+
+  clipboardDemos.on('error', function(e) {
+  });
 });
 
 function copyLink() {
