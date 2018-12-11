@@ -66,14 +66,24 @@
           
           <div v-if="items.length != 0" class="row justify-content-md-center pt-4">
             <div class="input-group">
+  <input id="foo" type="text" value="https://github.com/zenorocha/clipboard.js.git">
+    <span class="input-group-button">
+      <button class="btn" type="button" data-clipboard-demo="" data-clipboard-target="#foo">
+        <img class="clippy" src="https://clipboardjs.com/assets/images/clippy.svg" width="13" alt="Copy to clipboard">
+      </button>
+    </span>
+  </div>
+            <!--
+            <div class="input-group">
               <span class="input-group-btn">
                 <button class="btn btn-light" type="button">내 장바구니 공유</button>
               </span>
-              <input id="copy_text" type="text" class="form-control" :value="'https://ssagae.ga/list?listed=' + this.carts">
-              <span class="input-group-btn">
-                <button class="btn btn-primary copy" type="button">링크복사</button>
-              </span>
+              <input id="copy_text" type="text" class="form-control" :value="'https://ssagae.ga/list?listed=' + this.carts"></input>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary copy" type="button">링크복사</button>
+                </span>
             </div>
+-->
           </div>
           
           <div v-if="items.length != 0" class="row justify-content-md-center pt-4">
