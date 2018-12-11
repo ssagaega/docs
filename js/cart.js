@@ -19,6 +19,11 @@ $(document).ready(function () {
   
   infinityScroll( listApp );
   
+  $(document).on("mouseleave", ".copy", function(e) {
+      $(this).removeClass("tooltipped tooltipped-s")
+             .removeAttr("aria-label");
+  });
+  
   var clipboard = new Clipboard('.copy', {
     target: function(trigger) {
       return trigger.previousElementSibling;
