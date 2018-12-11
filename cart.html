@@ -30,7 +30,7 @@
   <!-- cookie -->
   <script src="libs/js-cookie/2/js.cookie.min.js"></script>
   <!-- clipboard -->
-  <script src="libs/clipboard/clipboard.js"></script>
+  <script src="libs/clipboard/clipboard.min.js"></script>
   
 </head>
 
@@ -68,9 +68,9 @@
               <span class="input-group-btn">
                 <button class="btn btn-light" type="button">내 장바구니 공유</button>
               </span>
-              <input id="linkinput" type="text" class="form-control" :value="'https://ssagae.ga/list?listed=' + this.carts">
+              <input id="copy_text" type="text" class="form-control" :value="'https://ssagae.ga/list?listed=' + this.carts">
               <span class="input-group-btn">
-                <button id="copy" class="btn btn-primary" type="button">링크복사</button>
+                <button class="btn btn-primary copy" type="button">링크복사</button>
               </span>
             </div>
           </div>
