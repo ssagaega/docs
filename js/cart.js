@@ -100,7 +100,7 @@ var listApp = new Vue({
         }
       });
       setItems( filted );
-      alert("장바구니는 7일만 유효합니다")
+      createAlert('장바구니','','장바구니는 7일만 유효합니다!','info',false,true,'pageMessages');
     }
     ,sortOption : function( sorttype ) {
       var sorted = this.items;
