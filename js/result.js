@@ -178,7 +178,7 @@ var listApp = new Vue({
       createAlert('장바구니','','장바구니는 7일간 유효합니다','info',false,true,'pageMessages');
     }
     ,sortOption : function( sorttype ) {
-      var sorted = items;
+      var sorted = this.items;
       if ( sorttype == null ) {
         sorttype = getRadio( this['sorttype'] );
       }
