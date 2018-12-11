@@ -76,15 +76,15 @@
               <div class="row justify-content-md-center pt-3 pb-3">
                 <div class="col-4" v-if="item.call" class='d-inline-block'>
                   <h3><i class="fa fa-phone"></i></h3>
-                  <h3>{{item.call}}분</h5>
+                  <h3>{{ item.call == -1 ? '기본' : (item.call*1).toLocaleString() + '분' }}</h5>
                 </div>
                 <div class="col-4 border border-dark border-top-0 border-bottom-0" v-if="item.sms" class='d-inline-block'>
                   <h3><i class="fa fa-comment"></i></h3>
-                  <h3>{{item.sms}}건</h3>
+                  <h3>{{ item.sms == -1 ? "기본" : (item.sms*1).toLocaleString() + '건' }}</h3>
                 </div>
                 <div class="col-4" v-if="item.data" class='d-inline-block'>
                   <h3><i class="fa fa-wifi"></i></h3>
-                  <h3>{{ item.data }}{{ item.data_unit }}</h3>
+                  <h3>{{ item.data == -1 ? "기본" : (item.data*1).toLocaleString() + item.data_unit }}</h3>
                   <span v-if="item.data_daily_offer" class="badge badge-secondary ml-1">{{item.data_daily_offer}}/일</span>
                   <span v-if="item.data_infinity" class="badge badge-secondary ml-1">{{ item.data_infinity }}</span><h5></h5>
                 </div>
