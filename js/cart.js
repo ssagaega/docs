@@ -19,14 +19,19 @@ $(document).ready(function () {
   
   infinityScroll( listApp );
   
-  var btn = document.getElementById('copy');
-    var clipboard = new ClipboardJS(btn);
-    clipboard.on('success', function(e) {
-        createAlert('링크복사','','링크가 복사되었습니다. 공유해보세요!','info',false,true,'pageMessages');
-    });
-    clipboard.on('error', function(e) {
-        createAlert('링크복사 실패','','링크를 누르고 Ctrl + C를 눌러보세요','danger',false,true,'pageMessages');
-    });
+  var clipboard = new Clipboard('.copy', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success',function(e) {
+      e.clearSelection();
+      createAlert('링크복사','','링크가 복사되었습니다. 공유해보세요!','info',false,true,'pageMessages');
+  });
+  clipboard.on('error',function(e) {
+      createAlert('링크복사 실패','','링크를 누르고 Ctrl + C를 눌러보세요','danger',false,true,'pageMessages');
+  });
+  
 });
 
 function copyLink() {
