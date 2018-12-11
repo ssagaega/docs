@@ -17,6 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="libs/bootstrap/4.0.0-beta/bootstrap.min.css">  
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/index.css"></link>
   
   <script src="libs/jquery/3.2.1/jquery-3.2.1.min.js"></script>
   <script src="libs/popper.js/1.12.3/popper.min.js"></script>
@@ -28,7 +29,9 @@
   <script src="libs/jquery-csv/0.8.9/jquery.csv.js"></script>
   <!-- cookie -->
   <script src="libs/js-cookie/2/js.cookie.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/index.css"></link>
+  <!-- clipboard -->
+  <script src="libs/clipboard/clipboard.js"></script>
+  
 </head>
 
 <body>
@@ -67,7 +70,7 @@
               </span>
               <input id="linkinput" type="text" class="form-control" :value="'https://ssagae.ga/list?listed=' + this.carts">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" onClick="copyLink()">링크복사</button>
+                <button id="copy" class="btn btn-primary" type="button">링크복사</button>
               </span>
             </div>
           </div>
