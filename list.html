@@ -82,22 +82,22 @@
                     <h3></h3>
 
                     <div v-if="item.package_offer">
-                      <i data-feather="package" style='height: 1em;'></i>
+                      <i class="fa fa-cube"></i>
                       <h5 style='display:inline-block'>{{ item.package_offer == -1 ? '기본' : (item.package_offer*1).toLocaleString() + ' ' + item.package_unit }} <span class="badge badge-secondary">조절형</span></h5>
                     </div>
 
                     <div class="d-inline-block" v-if="item.call">
-                      <i data-feather="phone-call" style='height: 1em;'></i>
+                      <i class="fa fa-phone"></i>
                       <h5 style='display:inline-block'>{{ item.call == -1 ? '기본' : (item.call*1).toLocaleString() + '분' }}</h5>
                     </div>
 
                     <div class="d-inline-block" v-if="item.sms">
-                      <i data-feather="message-circle" style='height: 1em;'></i>
+                      <i class="fa fa-comment-alt"></i>
                       <h5 style='display:inline-block'>{{ item.sms == -1 ? "기본" : (item.sms*1).toLocaleString() + '건' }}</h5>
                     </div>
 
                     <div class="d-inline-block" v-if="item.data">
-                      <i data-feather="wifi" style='height: 1em;'></i>
+                      <i class="fa fa-wifi"></i>
                       <h5 style='display:inline-block'>{{ item.data == -1 ? "기본" : (item.data*1).toLocaleString() + item.data_unit }}</h5>
                     </div>
 
